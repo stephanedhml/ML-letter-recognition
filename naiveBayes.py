@@ -1,7 +1,7 @@
-import nltk
 import numpy as np
 from sklearn.naive_bayes import GaussianNB
 import pandas as pd
+from sklearn import metrics
 
 
 letters = pd.read_csv('letter-recognition.txt')
@@ -22,4 +22,10 @@ accuracy = clf.score(test_points, test_labels)
 
 print(float(accuracy))
 
+expected = test_labels
+predicted = clf.predict(test_points)
+
+# summarize the fit of the model
+print(metrics.classification_report(expected, predicted))
+print(metrics.confusion_matrix(expected, predicted))
 
